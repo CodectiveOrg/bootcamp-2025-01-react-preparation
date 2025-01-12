@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { forwardRef, ReactNode } from "react";
 
 import styles from "./Input.module.css";
 
@@ -7,13 +7,16 @@ type Props = {
   suffixIcon?: ReactNode;
 };
 
-function Input({ placeholder, suffixIcon }: Props) {
+const Input = forwardRef<HTMLInputElement, Props>(function (
+  { placeholder, suffixIcon },
+  ref,
+) {
   return (
     <div className={styles["search-box"]}>
-      <input type="text" placeholder={placeholder} />
+      <input ref={ref} type="text" placeholder={placeholder} />
       {suffixIcon}
     </div>
   );
-}
+});
 
 export default Input;
