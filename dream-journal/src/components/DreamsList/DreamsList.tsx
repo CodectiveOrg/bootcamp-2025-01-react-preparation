@@ -5,6 +5,12 @@ import { Dream } from "../../types/dream.ts";
 
 import styles from "./DreamsList.module.css";
 
+const formatter = new Intl.DateTimeFormat("en-CA", {
+  year: "numeric",
+  month: "2-digit",
+  day: "2-digit",
+});
+
 type Props = {
   dreams: Dream[];
 };
@@ -14,10 +20,8 @@ function DreamsList({ dreams }: Props) {
     <ul className={styles.items}>
       {dreams.map((dream) => (
         <li key={dream.id}>
-          <label>
-            <input type="checkbox" />
-            <div className={styles.title}>{dream.title}</div>
-          </label>
+          <div className={styles.date}>[{formatter.format(dream.date)}]</div>
+          <div className={styles.title}>{dream.title}</div>
           <div className={styles.actions}>
             <button className={styles.edit}>
               <MingcuteEdit2Line />

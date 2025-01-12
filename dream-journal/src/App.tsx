@@ -15,7 +15,8 @@ function App() {
       return [];
     }
 
-    return JSON.parse(item);
+    const dreams: Dream[] = JSON.parse(item);
+    return dreams.map((dream) => ({ ...dream, date: new Date(dream.date) }));
   });
 
   const applyHandler = (dream: Dream): void => {

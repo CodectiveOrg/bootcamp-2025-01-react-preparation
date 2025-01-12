@@ -3,4 +3,5 @@ export type Dream = {
   title: string;
   content: string;
   vibe: "good" | "bad";
+  date: Date;
 };

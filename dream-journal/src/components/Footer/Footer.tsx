@@ -38,6 +38,7 @@ function Footer({ onApply }: Props) {
       title: titleRef.current?.value,
       content: "",
       vibe: "good",
+      date: new Date(),
     };
 
     onApply(dream);
