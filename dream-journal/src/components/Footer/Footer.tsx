@@ -10,6 +10,9 @@ import Button from "../Button/Button.tsx";
 import Input from "../Input/Input.tsx";
 
 import styles from "./Footer.module.css";
+import TextArea from "../TextArea/TextArea.tsx";
+import DateInput from "../DateInput/DateInput.tsx";
+import VibeInput from "../VibeInput/VibeInput.tsx";
 
 type Props = {
   onApply: (dream: Dream) => void;
@@ -18,6 +21,9 @@ type Props = {
 function Footer({ onApply }: Props) {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const titleRef = useRef<HTMLInputElement>(null);
+  const contentRef = useRef<HTMLTextAreaElement>(null);
+  const dateRef = useRef<HTMLInputElement>(null);
+  const vibeRef = useRef<HTMLSelectElement>(null);
 
   const openButtonClickHandler = (): void => {
     dialogRef.current?.showModal();
@@ -33,12 +39,27 @@ function Footer({ onApply }: Props) {
       return;
     }
 
+    if (!contentRef.current?.value) {
+      console.error("Content is required.");
+      return;
+    }
+
+    if (!dateRef.current?.value) {
+      console.error("Date is required.");
+      return;
+    }
+
+    if (!vibeRef.current?.value) {
+      console.error("Vibe is required.");
+      return;
+    }
+
     const dream: Dream = {
       id: uuidv4(),
       title: titleRef.current?.value,
-      content: "",
-      vibe: "good",
-      date: new Date(),
+      content: contentRef.current?.value,
+      date: new Date(dateRef.current?.value),
+      vibe: vibeRef.current?.value as "good" | "bad",
     };
 
     onApply(dream);
@@ -60,6 +81,9 @@ function Footer({ onApply }: Props) {
         <div className={styles.content}>
           <div className={styles.title}>New Dream</div>
           <Input ref={titleRef} placeholder="Input your title..." />
+          <TextArea ref={contentRef} placeholder="Input your content..." />
+          <DateInput ref={dateRef} />
+          <VibeInput ref={vibeRef} />
           <div className={styles.actions}>
             <Button
               variant="outlined"
