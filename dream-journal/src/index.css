@@ -1,0 +1,50 @@
+:root {
+  --color-surface: hsl(0, 0%, 97%);
+  --color-text: hsl(0, 0%, 15%);
+
+  --color-backdrop: hsl(0, 0%, 15%, 70%);
+  --color-fade: hsl(0, 0%, 80%);
+
+  --color-primary: hsl(243, 100%, 69%);
+  --color-primary-text: hsl(0, 0%, 97%);
+  --color-primary-border: hsl(243, 100%, 69%, 50%);
+  --color-primary-outline: hsl(243, 100%, 69%, 40%);
+
+  --color-danger: hsl(0, 100%, 45%);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  accent-color: var(--color-primary);
+  caret-color: var(--color-primary);
+
+  font-family: "Kanit", system-ui;
+}
+
+input,
+label,
+select,
+textarea,
+button,
+fieldset,
+legend,
+datalist,
+output,
+option,
+optgroup {
+  font: inherit;
+}
+
+body {
+  inline-size: min(45rem, 100% - 2rem);
+
+  margin-inline: auto;
+}

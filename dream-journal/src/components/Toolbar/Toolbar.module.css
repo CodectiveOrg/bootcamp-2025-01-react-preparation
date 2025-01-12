@@ -1,0 +1,10 @@
+.toolbar {
+  display: flex;
+  gap: 1rem;
+
+  margin-block: 1rem;
+
+  > :first-child {
+    flex: 1;
+  }
+}

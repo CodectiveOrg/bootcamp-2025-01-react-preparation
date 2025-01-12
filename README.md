@@ -1,1 +1,1 @@
-# bootcamp-2025-01-react-preparation
+# React Bootcamp
