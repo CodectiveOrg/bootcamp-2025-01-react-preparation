@@ -6,20 +6,23 @@ import Toolbar from "./components/Toolbar/Toolbar.tsx";
 import ThemeProvider from "./providers/ThemeProvider.tsx";
 import DreamsProvider from "./providers/DreamsProvider.tsx";
 import FiltersProvider from "./providers/FiltersProvider.tsx";
+import ModalProvider from "./providers/ModalProvider.tsx";
 
 function App() {
   return (
     <ThemeProvider>
       <DreamsProvider>
         <FiltersProvider>
-          <div className="app">
-            <Header />
-            <main>
-              <Toolbar />
-              <DreamsList />
-            </main>
-            <Footer />
-          </div>
+          <ModalProvider>
+            <div className="app">
+              <Header />
+              <main>
+                <Toolbar />
+                <DreamsList />
+              </main>
+              <Footer />
+            </div>
+          </ModalProvider>
         </FiltersProvider>
       </DreamsProvider>
     </ThemeProvider>
