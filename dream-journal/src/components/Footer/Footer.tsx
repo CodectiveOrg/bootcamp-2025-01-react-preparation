@@ -34,7 +34,7 @@ function Footer() {
     dialogRef.current?.close();
   };
 
-  const applyButtonClickHandler = (): void => {
+  const createButtonClickHandler = (): void => {
     const title = titleRef.current?.value;
     const content = contentRef.current?.value;
     const date = dateRef.current?.value;
@@ -98,8 +98,8 @@ function Footer() {
             >
               Cancel
             </Button>
-            <Button size="small" onClick={applyButtonClickHandler}>
-              Apply
+            <Button size="small" onClick={createButtonClickHandler}>
+              Create
             </Button>
           </div>
         </div>
