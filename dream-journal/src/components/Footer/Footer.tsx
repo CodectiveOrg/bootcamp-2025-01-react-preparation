@@ -28,6 +28,7 @@ function Footer() {
   };
 
   const cancelButtonClickHandler = (): void => {
+    formRef.current?.reset();
     dialogRef.current?.close();
   };
 
