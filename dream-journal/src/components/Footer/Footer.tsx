@@ -71,6 +71,7 @@ function Footer() {
 
     createDream(dream);
 
+    e.currentTarget.reset();
     dialogRef.current?.close();
   };
 
