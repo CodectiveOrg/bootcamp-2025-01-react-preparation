@@ -12,6 +12,7 @@
   input {
     flex: 1;
 
+    background-color: var(--color-surface-elevated);
     color: var(--color-primary);
 
     block-size: 1em;

@@ -12,6 +12,7 @@
   textarea {
     flex: 1;
 
+    background-color: var(--color-surface-elevated);
     color: var(--color-primary);
 
     border: none;
