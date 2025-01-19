@@ -4,6 +4,8 @@ import { FiltersContext } from "../../providers/FiltersProvider.tsx";
 
 import { Vibe } from "../../types/vibe.ts";
 
+import Select from "../Select/Select.tsx";
+
 function VibeFilter() {
   const { filters, setFilters } = useContext(FiltersContext);
 
@@ -20,11 +22,11 @@ function VibeFilter() {
   };
 
   return (
-    <select value={filters.vibe} onChange={changeHandler}>
+    <Select value={filters.vibe} onChange={changeHandler}>
       <option value="all">All</option>
       <option value="good">Good</option>
       <option value="bad">Bad</option>
-    </select>
+    </Select>
   );
 }
 

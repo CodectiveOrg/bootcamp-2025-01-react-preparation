@@ -1,0 +1,51 @@
+.select {
+  position: relative;
+
+  border-radius: 5px;
+
+  select {
+    appearance: none;
+
+    background-color: var(--color-primary);
+    color: var(--color-primary-text);
+
+    block-size: 100%;
+
+    padding: 0.5rem;
+    padding-inline-end: calc(0.5rem + 1ch + 0.5rem);
+
+    border: none;
+    border-radius: inherit;
+
+    font-size: 1rem;
+    line-height: 1;
+
+    option {
+      background-color: var(--color-surface-elevated);
+      color: var(--color-primary);
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  &::after {
+    content: "▼";
+    color: var(--color-primary-text);
+
+    position: absolute;
+    inset-block-start: 50%;
+    inset-inline-end: 0.5rem;
+
+    transform: translateY(-50%);
+
+    font-size: 0.75em;
+
+    pointer-events: none;
+  }
+
+  &:focus-within {
+    outline: 2px solid var(--color-primary-outline);
+  }
+}
