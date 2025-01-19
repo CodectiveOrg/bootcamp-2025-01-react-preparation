@@ -1,4 +1,4 @@
-import { useContext, useRef } from "react";
+import { FormEvent, useContext, useRef } from "react";
 
 import { v4 as uuidv4 } from "uuid";
 
@@ -21,10 +21,7 @@ function Footer() {
   const { createDream } = useContext(DreamsContext);
 
   const dialogRef = useRef<HTMLDialogElement>(null);
-  const titleRef = useRef<HTMLInputElement>(null);
-  const contentRef = useRef<HTMLTextAreaElement>(null);
-  const dateRef = useRef<HTMLInputElement>(null);
-  const vibeRef = useRef<HTMLSelectElement>(null);
+  const formRef = useRef<HTMLFormElement>(null);
 
   const openButtonClickHandler = (): void => {
     dialogRef.current?.showModal();
@@ -34,11 +31,15 @@ function Footer() {
     dialogRef.current?.close();
   };
 
-  const createButtonClickHandler = (): void => {
-    const title = titleRef.current?.value;
-    const content = contentRef.current?.value;
-    const date = dateRef.current?.value;
-    const vibe = vibeRef.current?.value as Vibe;
+  const formSubmitHandler = (e: FormEvent<HTMLFormElement>): void => {
+    e.preventDefault();
+
+    const formData = new FormData(e.currentTarget);
+
+    const title = formData.get("title") as string;
+    const content = formData.get("content") as string;
+    const date = formData.get("date") as string;
+    const vibe = formData.get("vibe") as Vibe;
 
     if (!title) {
       console.error("Title is required.");
@@ -84,25 +85,30 @@ function Footer() {
         <MingcuteAddLine />
       </Button>
       <dialog ref={dialogRef}>
-        <div className={styles.content}>
+        <form
+          ref={formRef}
+          className={styles.content}
+          onSubmit={formSubmitHandler}
+        >
           <div className={styles.title}>New Dream</div>
-          <Input ref={titleRef} placeholder="Input your title..." />
-          <TextArea ref={contentRef} placeholder="Input your content..." />
-          <DateInput ref={dateRef} />
-          <VibeInput ref={vibeRef} />
+          <Input name="title" placeholder="Input your title..." />
+          <TextArea name="content" placeholder="Input your content..." />
+          <DateInput name="date" />
+          <VibeInput name="vibe" />
           <div className={styles.actions}>
             <Button
+              type="button"
               variant="outlined"
               size="small"
               onClick={cancelButtonClickHandler}
             >
               Cancel
             </Button>
-            <Button size="small" onClick={createButtonClickHandler}>
+            <Button type="submit" size="small">
               Create
             </Button>
           </div>
-        </div>
+        </form>
       </dialog>
     </footer>
   );

@@ -1,11 +1,18 @@
-import { forwardRef } from "react";
+import { ComponentProps, forwardRef } from "react";
+
+import clsx from "clsx";
 
 import styles from "./VibeInput.module.css";
 
-const VibeInput = forwardRef<HTMLSelectElement>(function ({}, ref) {
+type Props = Omit<ComponentProps<"select">, "ref">;
+
+const VibeInput = forwardRef<HTMLSelectElement, Props>(function (
+  { className, ...otherProps },
+  ref,
+) {
   return (
-    <div className={styles["vibe-input"]}>
-      <select ref={ref}>
+    <div className={clsx(styles["vibe-input"], className)}>
+      <select ref={ref} {...otherProps}>
         <option value="good">😃 It was a good dream</option>
         <option value="bad">😢 It was a bad dream</option>
       </select>

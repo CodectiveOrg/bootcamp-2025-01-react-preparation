@@ -1,11 +1,18 @@
-import { forwardRef } from "react";
+import { ComponentProps, forwardRef } from "react";
+
+import clsx from "clsx";
 
 import styles from "./DateInput.module.css";
 
-const DateInput = forwardRef<HTMLInputElement>(function (_, ref) {
+type Props = Omit<ComponentProps<"input">, "ref" | "type">;
+
+const DateInput = forwardRef<HTMLInputElement, Props>(function (
+  { className, ...otherProps },
+  ref,
+) {
   return (
-    <div className={styles["date-input"]}>
-      <input ref={ref} type="date" />
+    <div className={clsx(styles["date-input"], className)}>
+      <input ref={ref} type="date" {...otherProps} />
     </div>
   );
 });

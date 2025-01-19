@@ -1,19 +1,20 @@
-import { ReactNode, forwardRef } from "react";
+import { ReactNode, forwardRef, ComponentProps } from "react";
+
+import clsx from "clsx";
 
 import styles from "./Input.module.css";
 
-type Props = {
-  placeholder?: string;
+type Props = Omit<ComponentProps<"input">, "ref" | "type"> & {
   suffixIcon?: ReactNode;
 };
 
 const Input = forwardRef<HTMLInputElement, Props>(function (
-  { placeholder, suffixIcon },
+  { suffixIcon, className, ...otherProps },
   ref,
 ) {
   return (
-    <div className={styles["input"]}>
-      <input ref={ref} type="text" placeholder={placeholder} />
+    <div className={clsx(styles["input"], className)}>
+      <input ref={ref} type="text" {...otherProps} />
       {suffixIcon}
     </div>
   );
