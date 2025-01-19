@@ -34,11 +34,7 @@ function FiltersProvider({ children }: Props) {
   const [filters, setFilters] = useState<Filters>({});
 
   const filteredDreams = useMemo(() => {
-    return dreams.filter((dream, index) => {
-      if (index === 0) {
-        console.log("filtering");
-      }
-
+    return dreams.filter((dream) => {
       if (filters.query && !doesInclude(dream.title, filters.query)) {
         return false;
       }
