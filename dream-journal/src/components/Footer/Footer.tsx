@@ -13,7 +13,7 @@ import Button from "../Button/Button.tsx";
 import DateInput from "../DateInput/DateInput.tsx";
 import Input from "../Input/Input.tsx";
 import TextArea from "../TextArea/TextArea.tsx";
-import VibeInput from "../VibeInput/VibeInput.tsx";
+import Select from "../Select/Select.tsx";
 
 import styles from "./Footer.module.css";
 
@@ -95,7 +95,10 @@ function Footer() {
           <Input name="title" placeholder="Input your title..." />
           <TextArea name="content" placeholder="Input your content..." />
           <DateInput name="date" />
-          <VibeInput name="vibe" />
+          <Select name="vibe" variant="outlined">
+            <option value="good">😃 It was a good dream</option>
+            <option value="bad">😢 It was a bad dream</option>
+          </Select>
           <div className={styles.actions}>
             <Button
               type="button"
