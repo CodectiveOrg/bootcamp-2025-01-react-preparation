@@ -1,24 +1,25 @@
-import { useRef } from "react";
+import { useContext, useRef } from "react";
 
 import { v4 as uuidv4 } from "uuid";
 
 import MingcuteAddLine from "../../icons/MingcuteAddLine.tsx";
 
+import { DreamsContext } from "../../providers/DreamsProvider.tsx";
+
 import { Dream } from "../../types/dream.ts";
+import { Vibe } from "../../types/vibe.ts";
 
 import Button from "../Button/Button.tsx";
-import Input from "../Input/Input.tsx";
-
-import styles from "./Footer.module.css";
-import TextArea from "../TextArea/TextArea.tsx";
 import DateInput from "../DateInput/DateInput.tsx";
+import Input from "../Input/Input.tsx";
+import TextArea from "../TextArea/TextArea.tsx";
 import VibeInput from "../VibeInput/VibeInput.tsx";
 
-type Props = {
-  onApply: (dream: Dream) => void;
-};
+import styles from "./Footer.module.css";
 
-function Footer({ onApply }: Props) {
+function Footer() {
+  const { createDream } = useContext(DreamsContext);
+
   const dialogRef = useRef<HTMLDialogElement>(null);
   const titleRef = useRef<HTMLInputElement>(null);
   const contentRef = useRef<HTMLTextAreaElement>(null);
@@ -34,35 +35,40 @@ function Footer({ onApply }: Props) {
   };
 
   const applyButtonClickHandler = (): void => {
-    if (!titleRef.current?.value) {
+    const title = titleRef.current?.value;
+    const content = contentRef.current?.value;
+    const date = dateRef.current?.value;
+    const vibe = vibeRef.current?.value as Vibe;
+
+    if (!title) {
       console.error("Title is required.");
       return;
     }
 
-    if (!contentRef.current?.value) {
+    if (!content) {
       console.error("Content is required.");
       return;
     }
 
-    if (!dateRef.current?.value) {
+    if (!date) {
       console.error("Date is required.");
       return;
     }
 
-    if (!vibeRef.current?.value) {
+    if (!vibe) {
       console.error("Vibe is required.");
       return;
     }
 
     const dream: Dream = {
       id: uuidv4(),
-      title: titleRef.current?.value,
-      content: contentRef.current?.value,
-      date: new Date(dateRef.current?.value),
-      vibe: vibeRef.current?.value as "good" | "bad",
+      title,
+      content,
+      date: new Date(date),
+      vibe,
     };
 
-    onApply(dream);
+    createDream(dream);
 
     dialogRef.current?.close();
   };

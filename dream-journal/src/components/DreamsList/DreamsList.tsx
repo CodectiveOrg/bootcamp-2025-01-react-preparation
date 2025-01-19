@@ -1,7 +1,9 @@
+import { useContext } from "react";
+
 import MingcuteEdit2Line from "../../icons/MingcuteEdit2Line.tsx";
 import MingcuteDelete2Line from "../../icons/MingcuteDelete2Line.tsx";
 
-import { Dream } from "../../types/dream.ts";
+import { FiltersContext } from "../../providers/FiltersProvider.tsx";
 
 import styles from "./DreamsList.module.css";
 
@@ -11,16 +13,14 @@ const formatter = new Intl.DateTimeFormat("en-CA", {
   day: "2-digit",
 });
 
-type Props = {
-  dreams: Dream[];
-};
+function DreamsList() {
+  const { filteredDreams } = useContext(FiltersContext);
 
-function DreamsList({ dreams }: Props) {
   return (
     <ul className={styles.items}>
-      {dreams.map((dream) => (
+      {filteredDreams.map((dream) => (
         <li key={dream.id}>
-          <div className={styles.date}>[{formatter.format(dream.date)}]</div>
+          <div className={styles.date}>{formatter.format(dream.date)}</div>
           <div className={styles.title}>{dream.title}</div>
           <div className={styles.actions}>
             <button className={styles.edit}>

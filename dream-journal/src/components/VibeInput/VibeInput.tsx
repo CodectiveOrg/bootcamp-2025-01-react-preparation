@@ -7,7 +7,7 @@ const VibeInput = forwardRef<HTMLSelectElement>(function ({}, ref) {
     <div className={styles["vibe-input"]}>
       <select ref={ref}>
         <option value="good">😃 It was a good dream</option>
-        <option value="bad">😢 It was a good dream</option>
+        <option value="bad">😢 It was a bad dream</option>
       </select>
     </div>
   );

@@ -1,4 +1,4 @@
-import { forwardRef, ReactNode } from "react";
+import { ReactNode, forwardRef } from "react";
 
 import styles from "./Input.module.css";
 
@@ -12,7 +12,7 @@ const Input = forwardRef<HTMLInputElement, Props>(function (
   ref,
 ) {
   return (
-    <div className={styles["search-box"]}>
+    <div className={styles["input"]}>
       <input ref={ref} type="text" placeholder={placeholder} />
       {suffixIcon}
     </div>

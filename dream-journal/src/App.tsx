@@ -1,41 +1,28 @@
-import { useEffect, useState } from "react";
-
 import Footer from "./components/Footer/Footer.tsx";
 import Header from "./components/Header/Header.tsx";
 import DreamsList from "./components/DreamsList/DreamsList.tsx";
 import Toolbar from "./components/Toolbar/Toolbar.tsx";
 
-import { Dream } from "./types/dream.ts";
+import ThemeProvider from "./providers/ThemeProvider.tsx";
+import DreamsProvider from "./providers/DreamsProvider.tsx";
+import FiltersProvider from "./providers/FiltersProvider.tsx";
 
 function App() {
-  const [dreams, setDreams] = useState<Dream[]>(() => {
-    const item = localStorage.getItem("dreams");
-
-    if (!item) {
-      return [];
-    }
-
-    const dreams: Dream[] = JSON.parse(item);
-    return dreams.map((dream) => ({ ...dream, date: new Date(dream.date) }));
-  });
-
-  const applyHandler = (dream: Dream): void => {
-    setDreams((old) => [...old, dream]);
-  };
-
-  useEffect(() => {
-    localStorage.setItem("dreams", JSON.stringify(dreams));
-  }, [dreams]);
-
   return (
-    <div className="app">
-      <Header />
-      <main>
-        <Toolbar />
-        <DreamsList dreams={dreams} />
-      </main>
-      <Footer onApply={applyHandler} />
-    </div>
+    <ThemeProvider>
+      <DreamsProvider>
+        <FiltersProvider>
+          <div className="app">
+            <Header />
+            <main>
+              <Toolbar />
+              <DreamsList />
+            </main>
+            <Footer />
+          </div>
+        </FiltersProvider>
+      </DreamsProvider>
+    </ThemeProvider>
   );
 }
 
