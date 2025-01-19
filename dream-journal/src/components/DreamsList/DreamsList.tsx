@@ -1,5 +1,9 @@
 import { useContext } from "react";
 
+import clsx from "clsx";
+
+import FluentEmojiCryingFace from "../../icons/FluentEmojiCryingFace.tsx";
+import FluentEmojiSmilingFaceWithHeartEyes from "../../icons/FluentEmojiSmilingFaceWithHeartEyes.tsx";
 import MingcuteEdit2Line from "../../icons/MingcuteEdit2Line.tsx";
 import MingcuteDelete2Line from "../../icons/MingcuteDelete2Line.tsx";
 
@@ -20,8 +24,15 @@ function DreamsList() {
     <ul className={styles.items}>
       {filteredDreams.map((dream) => (
         <li key={dream.id}>
-          <div className={styles.date}>{formatter.format(dream.date)}</div>
+          <div className={clsx(styles.vibe, styles[dream.vibe])}>
+            {dream.vibe === "good" ? (
+              <FluentEmojiSmilingFaceWithHeartEyes />
+            ) : (
+              <FluentEmojiCryingFace />
+            )}
+          </div>
           <div className={styles.title}>{dream.title}</div>
+          <div className={styles.date}>{formatter.format(dream.date)}</div>
           <div className={styles.actions}>
             <button className={styles.edit}>
               <MingcuteEdit2Line />

@@ -8,30 +8,50 @@
   padding-block: 1rem;
 
   > li {
-    display: flex;
-    align-items: baseline;
-    gap: 0.5rem;
+    background-color: var(--color-surface-elevated);
+    box-shadow: var(--box-shadow);
 
-    padding-block-end: 1rem;
+    display: grid;
+    grid-template-areas: "vibe title actions" "vibe date actions";
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    column-gap: 0.5rem;
 
-    .date {
-      font-family: monospace;
-      font-size: 1rem;
-      font-weight: 700;
+    padding: 0.5rem 1rem;
+
+    border-radius: 0.5rem;
+
+    .vibe {
+      grid-area: vibe;
+
+      min-block-size: 100%;
+      block-size: 0;
+
+      svg {
+        block-size: 100%;
+        inline-size: auto;
+      }
     }
 
     .title {
+      grid-area: title;
+
       font-size: 1.25rem;
       font-weight: 500;
     }
 
+    .date {
+      grid-area: date;
+
+      font-family: monospace;
+      font-size: 1rem;
+      font-weight: 300;
+    }
+
     .actions {
-      opacity: 0;
+      grid-area: actions;
 
       display: flex;
-      gap: 0.5rem;
-
-      margin-inline-start: auto;
+      gap: 1rem;
 
       button {
         background-color: transparent;
@@ -42,7 +62,7 @@
 
         border: none;
 
-        font-size: 1.125rem;
+        font-size: 1.25rem;
 
         cursor: pointer;
 
@@ -58,16 +78,6 @@
           }
         }
       }
-    }
-
-    &:hover {
-      .actions {
-        opacity: 1;
-      }
-    }
-
-    &:not(:last-child) {
-      border-block-end: 1px solid var(--color-primary-border);
     }
   }
 }
