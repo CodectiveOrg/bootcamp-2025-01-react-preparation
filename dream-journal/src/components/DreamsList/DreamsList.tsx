@@ -8,6 +8,9 @@ import MingcuteEdit2Line from "../../icons/MingcuteEdit2Line.tsx";
 import MingcuteDelete2Line from "../../icons/MingcuteDelete2Line.tsx";
 
 import { FiltersContext } from "../../providers/FiltersProvider.tsx";
+import { ModalContext } from "../../providers/ModalProvider.tsx";
+
+import { Dream } from "../../types/dream.ts";
 
 import styles from "./DreamsList.module.css";
 
@@ -19,6 +22,11 @@ const formatter = new Intl.DateTimeFormat("en-CA", {
 
 function DreamsList() {
   const { filteredDreams } = useContext(FiltersContext);
+  const { openModal } = useContext(ModalContext);
+
+  const editButtonClickHandler = (dream: Dream): void => {
+    openModal(dream);
+  };
 
   return (
     <ul className={styles.items}>
@@ -34,7 +42,10 @@ function DreamsList() {
           <div className={styles.title}>{dream.title}</div>
           <div className={styles.date}>{formatter.format(dream.date)}</div>
           <div className={styles.actions}>
-            <button className={styles.edit}>
+            <button
+              className={styles.edit}
+              onClick={() => editButtonClickHandler(dream)}
+            >
               <MingcuteEdit2Line />
             </button>
             <button className={styles.remove}>

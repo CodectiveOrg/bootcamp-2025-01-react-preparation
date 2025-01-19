@@ -14,11 +14,12 @@ import { Vibe } from "../../types/vibe.ts";
 import styles from "./CreateEditForm.module.css";
 
 type Props = {
+  editingDream?: Dream;
   onSubmit: (dream: Dream) => void;
   onCancel: () => void;
 };
 
-function CreateEditForm({ onSubmit, onCancel }: Props) {
+function CreateEditForm({ editingDream, onSubmit, onCancel }: Props) {
   const formRef = useRef<HTMLFormElement>(null);
 
   const cancelButtonClickHandler = (): void => {
@@ -57,7 +58,7 @@ function CreateEditForm({ onSubmit, onCancel }: Props) {
     }
 
     const dream: Dream = {
-      id: uuidv4(),
+      id: editingDream?.id ?? uuidv4(),
       title,
       content,
       date: new Date(date),
@@ -72,10 +73,21 @@ function CreateEditForm({ onSubmit, onCancel }: Props) {
   return (
     <form ref={formRef} className={styles.form} onSubmit={formSubmitHandler}>
       <div className={styles.title}>New Dream</div>
-      <Input name="title" placeholder="Input your title..." />
-      <TextArea name="content" placeholder="Input your content..." />
-      <DateInput name="date" />
-      <Select name="vibe" variant="outlined">
+      <Input
+        name="title"
+        placeholder="Input your title..."
+        defaultValue={editingDream?.title}
+      />
+      <TextArea
+        name="content"
+        placeholder="Input your content..."
+        defaultValue={editingDream?.content}
+      />
+      <DateInput
+        name="date"
+        defaultValue={editingDream?.date.toISOString().split("T")[0]}
+      />
+      <Select name="vibe" variant="outlined" defaultValue={editingDream?.vibe}>
         <option value="good">😃 It was a good dream</option>
         <option value="bad">😢 It was a bad dream</option>
       </Select>
@@ -89,7 +101,7 @@ function CreateEditForm({ onSubmit, onCancel }: Props) {
           Cancel
         </Button>
         <Button type="submit" size="small">
-          Create
+          {editingDream ? "Edit" : "Create"}
         </Button>
       </div>
     </form>

@@ -62,7 +62,11 @@ function ModalProvider({ children }: Props) {
     <ModalContext.Provider value={{ openModal, closeModal }}>
       {children}
       <dialog ref={dialogRef} className={styles.dialog}>
-        <CreateEditForm onSubmit={submitHandler} onCancel={cancelHandler} />
+        <CreateEditForm
+          editingDream={editingDream}
+          onSubmit={submitHandler}
+          onCancel={cancelHandler}
+        />
       </dialog>
     </ModalContext.Provider>
   );
